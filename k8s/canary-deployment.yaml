@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlops-app-canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlops-app
+      version: canary
+  template:
+    metadata:
+      labels:
+        app: mlops-app
+        version: canary
+    spec:
+      containers:
+      - name: mlops-app
+        image: mlops-production-skeleton:canary
+        ports:
+        - containerPort: 8000
